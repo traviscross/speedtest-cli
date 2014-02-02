@@ -10,7 +10,7 @@ Vcs-Browser: https://github.com/sivel/speedtest-cli
 
 Package: speedtest-cli
 Architecture: all
-Depends: ${misc:Depends}, ${python3:Depends}
+Depends: ${misc:Depends}, ${python3:Depends}, python3-pkg-resources
 Description: Perform speedtest.net bandwidth tests
  This package allows you to perform speedtest.net bandwidth tests from
  the command line.

@@ -1,3 +1,9 @@
+speedtest-cli (0.2.4-3) unstable; urgency=low
+
+  * Add missing runtime dependency
+
+ -- Travis Cross <tc@traviscross.com>  Sun, 02 Feb 2014 11:56:34 +0000
+
 speedtest-cli (0.2.4-2) unstable; urgency=low
 
   * Make package architecture-independent
