@@ -1,11 +1,11 @@
 speedtest-cli (0.2.4-2) unstable; urgency=low
 
-  * Make package architecture-independent.
+  * Make package architecture-independent
 
  -- Travis Cross <tc@traviscross.com>  Sun, 02 Feb 2014 11:35:03 +0000
 
 speedtest-cli (0.2.4-1) unstable; urgency=low
 
-  * Initial Release.
+  * Initial Release
 
  -- Travis Cross <tc@traviscross.com>  Sun, 02 Feb 2014 05:33:42 +0000
