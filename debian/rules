@@ -16,18 +16,18 @@ clean:
 %.1: %.1.ronn debian/rules
 	ronn -r --manual="User Manuals" --organization="speedtest-cli $(VER)" $<
 
-build: .stamp-build-indep .stamp-build-arch
-.stamp-build-indep:
+build: .stamp-build-arch .stamp-build-indep
+.stamp-build-arch:
 	touch $@
-.stamp-build-arch: debian/speedtest-cli.1
+.stamp-build-indep: debian/speedtest-cli.1
 	dh_testdir
 	pybuild -i python3 --build
 	touch $@
 
-install: .stamp-install-indep .stamp-install-arch
-.stamp-install-indep: .stamp-build-indep
-	touch $@
+install: .stamp-install-arch .stamp-install-indep
 .stamp-install-arch: .stamp-build-arch
+	touch $@
+.stamp-install-indep: .stamp-build-indep
 	dh_testdir
 	dh_testroot
 	dh_prep
@@ -43,10 +43,10 @@ install: .stamp-install-indep .stamp-install-arch
 	dh_fixperms
 	touch $@
 
-binary: .stamp-binary-indep .stamp-binary-arch
-.stamp-binary-indep: .stamp-install-indep
+binary: .stamp-binary-arch .stamp-binary-indep
+.stamp-binary-indep: .stamp-install-arch
 	touch $@
-.stamp-binary-arch: .stamp-install-arch
+.stamp-binary-arch: .stamp-install-indep
 	dh_python3
 	dh_installdeb
 	dh_gencontrol
@@ -54,13 +54,13 @@ binary: .stamp-binary-indep .stamp-binary-arch
 	dh_builddeb
 	touch $@
 
-build-indep: .stamp-build-indep
 build-arch: .stamp-build-arch
-install-indep: .stamp-install-indep
+build-indep: .stamp-build-indep
 install-arch: .stamp-install-arch
-binary-indep: .stamp-binary-indep
+install-indep: .stamp-install-indep
 binary-arch: .stamp-binary-arch
+binary-indep: .stamp-binary-indep
 .PHONY: all clean
-.PHONY: build build-indep build-arch
-.PHONY: install install-indep install-arch
-.PHONY: binary binary-indep binary-arch
+.PHONY: build build-arch build-indep
+.PHONY: install install-arch install-indep
+.PHONY: binary binary-arch binary-indep
