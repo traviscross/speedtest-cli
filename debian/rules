@@ -1,0 +1,65 @@
+#!/usr/bin/make -f
+# -*- mode:makefile -*-
+export DH_VERBOSE=1
+
+VER := $(shell dpkg-parsechangelog | awk '$$1 == "Version:" { print $$2; }')
+
+all: binary
+
+clean:
+	dh_testdir
+	python3 setup.py clean -a
+	dh_clean
+	rm -f .stamp-* debian/*.1
+	rm -rf .pybuild *.egg-info
+
+%.1: %.1.ronn debian/rules
+	ronn -r --manual="User Manuals" --organization="speedtest-cli $(VER)" $<
+
+build: .stamp-build-indep .stamp-build-arch
+.stamp-build-indep:
+	touch $@
+.stamp-build-arch: debian/speedtest-cli.1
+	dh_testdir
+	pybuild -i python3 --build
+	touch $@
+
+install: .stamp-install-indep .stamp-install-arch
+.stamp-install-indep: .stamp-build-indep
+	touch $@
+.stamp-install-arch: .stamp-build-arch
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+	pybuild -i python3 --install
+	rm -f debian/tmp/usr/bin/speedtest
+	mv debian/tmp/* debian/speedtest-cli/
+	dh_installchangelogs
+	dh_installdocs
+	dh_installman
+	dh_compress
+	dh_fixperms
+	touch $@
+
+binary: .stamp-binary-indep .stamp-binary-arch
+.stamp-binary-indep: .stamp-install-indep
+	touch $@
+.stamp-binary-arch: .stamp-install-arch
+	dh_python3
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+	touch $@
+
+build-indep: .stamp-build-indep
+build-arch: .stamp-build-arch
+install-indep: .stamp-install-indep
+install-arch: .stamp-install-arch
+binary-indep: .stamp-binary-indep
+binary-arch: .stamp-binary-arch
+.PHONY: all clean
+.PHONY: build build-indep build-arch
+.PHONY: install install-indep install-arch
+.PHONY: binary binary-indep binary-arch

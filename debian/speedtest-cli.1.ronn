@@ -1,0 +1,55 @@
+speedtest-cli(1) -- perform speedtest.net bandwidth tests
+=========================================================
+
+## SYNOPSIS
+
+`speedtest-cli` [`--help`]
+
+`speedtest-cli` [`--version`]
+
+`speedtest-cli` [<options>]
+
+## DESCRIPTION
+
+`speedtest-cli` allows you to perform a bandwidth test using
+speedtest.net.
+
+## OPTIONS
+
+  * `-h`, `--help`:
+    Show inline help
+
+  * `--list`:
+    Display a list of speedtest.net servers sorted by distance and
+    exit.
+
+  * `--mini` <mini>:
+    Use URL <mini> as the Speedtest Mini server.
+
+  * `--server` <server-id>:
+    Test against server ID <server-id>.
+
+  * `--share`:
+    Store the results of this speedtest on speedtest.net and return a
+    URL to the resulting image.
+
+  * `--simple`:
+    Suppress verbose output.
+
+  * `--source` <source-ip>:
+    Bind to IP address <source-ip> to run the speed test.
+
+  * `--version`:
+    Show the version number and exit.
+
+## AUTHORS
+
+This version of speedtest-cli was originally written by `Matt Martz
+<matt@sivel.net>`.  This man page and the packaging for Debian was
+written by `Travis Cross <tc@traviscross.com>`.
+
+## SEE ALSO
+
+https://github.com/sivel/speedtest-cli
+
+iperf(1), 2ping(1)

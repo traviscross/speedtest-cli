@@ -1,0 +1,16 @@
+Source: speedtest-cli
+Section: net
+Priority: optional
+Maintainer: Travis Cross <tc@traviscross.com>
+Build-Depends: debhelper (>= 9), ruby-ronn, dh-python, python3, python3-setuptools
+Standards-Version: 3.9.5
+Homepage: https://github.com/sivel/speedtest-cli
+Vcs-Git: https://github.com/sivel/speedtest-cli.git
+Vcs-Browser: https://github.com/sivel/speedtest-cli
+
+Package: speedtest-cli
+Architecture: any
+Depends: ${misc:Depends}, ${python3:Depends}
+Description: Perform speedtest.net bandwidth tests
+ This package allows you to perform speedtest.net bandwidth tests from
+ the command line.
