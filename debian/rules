@@ -38,6 +38,7 @@ install: .stamp-install-indep .stamp-install-arch
 	dh_installchangelogs
 	dh_installdocs
 	dh_installman
+	dh_lintian
 	dh_compress
 	dh_fixperms
 	touch $@
